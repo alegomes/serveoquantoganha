@@ -1,0 +1,75 @@
+<html>
+<head>
+    <title>Quantos Profissionais Valem um Profissional?</title>
+</head>
+<link href="css/bootstrap.css" rel="stylesheet">
+<script src="js/jquery-1.7.2.min.js"></script>
+<script>
+$(document).ready(function() {
+    $.ajax({
+        type: "GET",
+        url: "servidores.csv",
+        dataType: "text",
+        success: function(d) {popula(d);}
+     });
+});
+function popula(d) {
+    var dados = d.split(/\r\n|\n/);
+    var headers = dados[0].split(',');
+    var lines = [];
+    for (var i=1; i<dados.length; i++) {
+        var data = dados[i].split(',');
+        if (data.length == headers.length) {
+            //alert(data[0])
+
+            $("#cargo1").append($("<option>"+data[0]+"</option>"))
+            var tarr = [];
+            for (var j=0; j<headers.length; j++) {
+                tarr.push(headers[j]+":"+data[j])
+            }
+            lines.push(tarr);
+        }
+    }
+    alert(dados)
+}
+ </script>
+
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+    </style>
+<div class="container">
+    <h1>Quantos profissionais valem um profissional</h1>
+    <p><a class="btn btn-primary btn-large" style="display:none">Learn more &raquo;</a></p>
+    <div class="">
+        <div id="cargo">
+            <select id="cargo1">
+                <option>Escolha o cargo
+            </select>
+            <select>
+                <option>Escolha o cargo
+                <option>FOO
+            </select>
+            <a class="btn btn-success" href="#"><i class="icon-user icon-white"></i> Comparar</a>
+        </div>
+    </div>
+    <div id="content">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Cargo I</th>
+                    <th>Cargo II</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Cargo 1</td>
+                    <td>Tantos cargos 2</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</html>
